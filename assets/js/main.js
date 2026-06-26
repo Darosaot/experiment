@@ -17,7 +17,11 @@
     { slug: "tip-calculator",      icon: "🧾", name: "Tip Calculator",        desc: "Calculate tips and split the bill fairly." },
     { slug: "discount-calculator", icon: "🏷️", name: "Discount Calculator",   desc: "Sale price and how much you really save." },
     { slug: "compound-interest-calculator", icon: "📈", name: "Compound Interest", desc: "See how savings & investments grow." },
-    { slug: "base64-encoder",      icon: "🔠", name: "Base64 Encode/Decode",  desc: "Encode & decode Base64 with Unicode support." }
+    { slug: "base64-encoder",      icon: "🔠", name: "Base64 Encode/Decode",  desc: "Encode & decode Base64 with Unicode support." },
+    { slug: "vat-calculator",      icon: "🧮", name: "VAT Calculator",        desc: "Add or remove VAT / sales tax at any rate." },
+    { slug: "json-formatter",      icon: "{ }", name: "JSON Formatter",        desc: "Beautify, validate & minify JSON privately." },
+    { slug: "random-number-generator", icon: "🎲", name: "Random Number",      desc: "Pick random numbers, with or without duplicates." },
+    { slug: "lorem-ipsum-generator", icon: "✒️", name: "Lorem Ipsum",          desc: "Placeholder text by paragraph, sentence or word." }
   ];
   window.QT_TOOLS = TOOLS;
 

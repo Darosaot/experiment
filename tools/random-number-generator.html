@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Random Number Generator — Pick Numbers in a Range | QuickTools</title>
+<meta name="description" content="Free random number generator. Pick one or many random numbers in any range, with or without duplicates. Great for raffles, giveaways, games and decisions." />
+<meta name="keywords" content="random number generator, pick a random number, number picker, raffle generator, rng, random between" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/random-number-generator.html" />
+<meta property="og:title" content="Free Random Number Generator — QuickTools" />
+<meta property="og:description" content="Pick random numbers in any range, with or without duplicates." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Random Number Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/random-number-generator.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>🎲 Random Number Generator</h1>
+    <p>Pick one or many random numbers in any range — fair, fast and unbiased.</p>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <div class="field"><label>Minimum</label><input type="number" id="min" value="1" oninput="gen()" /></div>
+      <div class="field"><label>Maximum</label><input type="number" id="max" value="100" oninput="gen()" /></div>
+      <div class="field"><label>How many</label><input type="number" id="count" value="1" min="1" oninput="gen()" /></div>
+    </div>
+    <label class="check" style="max-width:260px"><input type="checkbox" id="unique" onchange="gen()"> No duplicates (unique draw)</label>
+    <div class="output" style="margin-top:14px;text-align:center"><span class="result-big" id="result">—</span></div>
+    <div class="btn-row" style="justify-content:center;margin-top:12px">
+      <button class="btn" onclick="gen()">↻ Generate</button>
+      <button class="btn secondary" onclick="QT.copy(document.getElementById('result').textContent)">Copy</button>
+    </div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>About this random number generator</h2>
+    <p>Need to pick a raffle winner, roll a die, choose a lottery line, or just settle a decision? This generator produces uniformly random numbers in the range you set, using your browser's cryptographically secure random source for genuine unpredictability.</p>
+    <h3>Unique mode</h3>
+    <p>Tick "no duplicates" to draw several different numbers at once — perfect for raffles or picking lottery numbers where each must be distinct. (You can't draw more unique numbers than the range contains.)</p>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>Is it truly random?</summary><p>It uses <code>crypto.getRandomValues</code>, the browser's cryptographically secure generator — far better than typical pseudo-random functions.</p></details>
+      <details><summary>Are the min and max included?</summary><p>Yes, both ends of the range are possible results (inclusive).</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+function rnd(min,max){
+  var range=max-min+1;
+  var arr=new Uint32Array(1);crypto.getRandomValues(arr);
+  return min+(arr[0]%range);
+}
+function gen(){
+  var min=Math.floor(+document.getElementById('min').value);
+  var max=Math.floor(+document.getElementById('max').value);
+  var count=Math.max(1,Math.floor(+document.getElementById('count').value||1));
+  var unique=document.getElementById('unique').checked;
+  var res=document.getElementById('result');
+  if(max<min){res.textContent='Max must be ≥ Min';return;}
+  var out=[];
+  if(unique){
+    var span=max-min+1;
+    if(count>span){res.textContent='Only '+span+' unique values available';return;}
+    var pool=[];for(var i=min;i<=max;i++)pool.push(i);
+    for(var k=0;k<count;k++){var idx=rnd(0,pool.length-1);out.push(pool[idx]);pool.splice(idx,1);}
+  }else{
+    for(var j=0;j<count;j++)out.push(rnd(min,max));
+  }
+  res.textContent=out.join(', ');
+}
+gen();
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lorem Ipsum Generator — Free Placeholder Text Tool | QuickTools</title>
+<meta name="description" content="Free Lorem Ipsum generator. Create paragraphs, sentences or words of classic placeholder text for mockups and designs, and copy it with one click." />
+<meta name="keywords" content="lorem ipsum generator, placeholder text, dummy text, filler text, lipsum, design placeholder" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/lorem-ipsum-generator.html" />
+<meta property="og:title" content="Free Lorem Ipsum Generator — QuickTools" />
+<meta property="og:description" content="Generate placeholder text by paragraphs, sentences or words." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✒️</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Lorem Ipsum Generator","applicationCategory":"DesignApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/lorem-ipsum-generator.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>✒️ Lorem Ipsum Generator</h1>
+    <p>Classic placeholder text for mockups, layouts and designs.</p>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <div class="field"><label>Amount</label><input type="number" id="count" value="3" min="1" max="50" oninput="gen()" /></div>
+      <div class="field"><label>Type</label>
+        <select id="type" onchange="gen()">
+          <option value="paragraphs">Paragraphs</option>
+          <option value="sentences">Sentences</option>
+          <option value="words">Words</option>
+        </select>
+      </div>
+      <div class="field" style="display:flex;align-items:flex-end">
+        <label class="check" style="margin:0"><input type="checkbox" id="startClassic" checked onchange="gen()"> Start with "Lorem ipsum…"</label>
+      </div>
+    </div>
+    <div class="field"><label>Output</label><textarea id="out" readonly style="min-height:220px"></textarea></div>
+    <div class="btn-row"><button class="btn" onclick="gen()">↻ Regenerate</button><button class="btn secondary" onclick="QT.copy(document.getElementById('out').value)">Copy</button></div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>About Lorem Ipsum</h2>
+    <p>Lorem Ipsum is scrambled Latin-like placeholder text that designers and developers have used since the 1500s to fill layouts without the distraction of real, readable copy. It lets you focus on the visual design — spacing, type, hierarchy — before the final content is ready.</p>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>Why not just type "asdf asdf"?</summary><p>Lorem Ipsum has a roughly natural distribution of word and sentence lengths, so layouts look realistic — repeated letters don't.</p></details>
+      <details><summary>Is it always the same text?</summary><p>It's randomly assembled from the classic Lorem Ipsum word list each time, so regenerating gives fresh filler.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+var WORDS="lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure in reprehenderit voluptate velit esse cillum eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit anim id est laborum".split(" ");
+function ri(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function word(){return WORDS[ri(0,WORDS.length-1)];}
+function sentence(){
+  var n=ri(6,14),s=[];for(var i=0;i<n;i++)s.push(word());
+  var str=s.join(" ");return str.charAt(0).toUpperCase()+str.slice(1)+".";
+}
+function paragraph(){var n=ri(3,6),p=[];for(var i=0;i<n;i++)p.push(sentence());return p.join(" ");}
+function gen(){
+  var type=document.getElementById('type').value;
+  var count=Math.min(50,Math.max(1,+document.getElementById('count').value||1));
+  var classic=document.getElementById('startClassic').checked;
+  var out=[];
+  if(type==='words'){for(var i=0;i<count;i++)out.push(word());var t=out.join(" ");document.getElementById('out').value=classic?("Lorem ipsum "+t):t;return;}
+  if(type==='sentences'){for(var j=0;j<count;j++)out.push(sentence());}
+  else{for(var k=0;k<count;k++)out.push(paragraph());}
+  if(classic&&out.length){out[0]=out[0].replace(/^[^ ]+ [^ ]+/,'Lorem ipsum');}
+  document.getElementById('out').value=out.join(type==='paragraphs'?"\n\n":" ");
+}
+gen();
+</script>
+</body>
+</html>

@@ -15,6 +15,10 @@
   <url><loc>https://quicktools.netlify.app/tools/discount-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://quicktools.netlify.app/tools/compound-interest-calculator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://quicktools.netlify.app/tools/base64-encoder.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quicktools.netlify.app/tools/vat-calculator.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://quicktools.netlify.app/tools/json-formatter.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://quicktools.netlify.app/tools/random-number-generator.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://quicktools.netlify.app/tools/lorem-ipsum-generator.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://quicktools.netlify.app/guides/index.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://quicktools.netlify.app/guides/how-to-calculate-loan-payments.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://quicktools.netlify.app/guides/compound-interest-explained.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
