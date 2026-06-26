@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Age Calculator — Find Your Exact Age in Years, Months & Days | QuickTools</title>
+<meta name="description" content="Free age calculator. Enter your date of birth to find your exact age in years, months, days — plus total days lived and days until your next birthday." />
+<meta name="keywords" content="age calculator, calculate age, age from date of birth, how old am i, days until birthday" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/age-calculator.html" />
+<meta property="og:title" content="Free Age Calculator — QuickTools" />
+<meta property="og:description" content="Find your exact age in years, months and days." />
+<meta property="og:image" content="https://quicktools.netlify.app/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="QuickTools — free online tools" />
+<meta name="twitter:image" content="https://quicktools.netlify.app/assets/og.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Age Calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/age-calculator.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>🎂 Age Calculator</h1>
+    <p>Find your exact age and a few fun stats from your date of birth.</p>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <div class="field"><label>Date of birth</label><input type="date" id="dob" oninput="calc()" /></div>
+      <div class="field"><label>Age at date (default today)</label><input type="date" id="at" oninput="calc()" /></div>
+    </div>
+    <div class="output"><span class="result-big" id="main">—</span></div>
+    <div class="stat-row" style="margin-top:14px">
+      <div class="stat"><div class="num" id="days">—</div><div class="lbl">Total days</div></div>
+      <div class="stat"><div class="num" id="weeks">—</div><div class="lbl">Total weeks</div></div>
+      <div class="stat"><div class="num" id="next">—</div><div class="lbl">Days to birthday</div></div>
+    </div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>About this age calculator</h2>
+    <p>This tool calculates the precise time between your date of birth and today (or any date you choose), accounting for the varying length of months and for leap years. It's handy for forms that ask for an exact age, for milestone celebrations, or just curiosity.</p>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>How is age calculated?</summary><p>We count complete years first, then the remaining whole months, then the leftover days — the same way you'd say "32 years, 4 months and 12 days."</p></details>
+      <details><summary>Does it handle leap years?</summary><p>Yes. Date math uses your browser's calendar engine, which correctly handles leap days and month lengths.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+function calc(){
+  var dobV=document.getElementById('dob').value;
+  var atV=document.getElementById('at').value;
+  if(!dobV){document.getElementById('main').textContent='Enter your date of birth';return;}
+  var dob=new Date(dobV);var at=atV?new Date(atV):new Date();
+  if(at<dob){document.getElementById('main').textContent='Date is before birth';return;}
+  var y=at.getFullYear()-dob.getFullYear();
+  var m=at.getMonth()-dob.getMonth();
+  var d=at.getDate()-dob.getDate();
+  if(d<0){m--;d+=new Date(at.getFullYear(),at.getMonth(),0).getDate();}
+  if(m<0){y--;m+=12;}
+  document.getElementById('main').textContent=y+' years, '+m+' months, '+d+' days';
+  var msPerDay=86400000;
+  var totalDays=Math.floor((at-dob)/msPerDay);
+  document.getElementById('days').textContent=totalDays.toLocaleString();
+  document.getElementById('weeks').textContent=Math.floor(totalDays/7).toLocaleString();
+  var nb=new Date(at.getFullYear(),dob.getMonth(),dob.getDate());
+  if(nb<at)nb.setFullYear(at.getFullYear()+1);
+  document.getElementById('next').textContent=Math.ceil((nb-at)/msPerDay);
+}
+calc();
+</script>
+</body>
+</html>

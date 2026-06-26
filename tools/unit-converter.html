@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Unit Converter — Length, Weight, Temperature & Data | QuickTools</title>
+<meta name="description" content="Free unit converter for length, weight, temperature and digital storage. Convert metres, miles, kilograms, pounds, Celsius, Fahrenheit, MB, GB and more instantly." />
+<meta name="keywords" content="unit converter, length converter, weight converter, temperature converter, celsius to fahrenheit, km to miles, kg to lbs, data converter" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/unit-converter.html" />
+<meta property="og:title" content="Free Unit Converter — QuickTools" />
+<meta property="og:description" content="Convert length, weight, temperature and data units instantly." />
+<meta property="og:image" content="https://quicktools.netlify.app/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="QuickTools — free online tools" />
+<meta name="twitter:image" content="https://quicktools.netlify.app/assets/og.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Unit Converter","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/unit-converter.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>📐 Unit Converter</h1>
+    <p>Convert length, weight, temperature and digital storage in an instant.</p>
+  </div>
+
+  <div class="panel">
+    <div class="field">
+      <label>Category</label>
+      <select id="cat" onchange="buildUnits()"></select>
+    </div>
+    <div class="row">
+      <div class="field"><label>From</label><input type="number" id="inVal" value="1" oninput="convert()" /><select id="from" onchange="convert()" style="margin-top:8px"></select></div>
+      <div class="field"><label>To</label><input type="number" id="outVal" readonly /><select id="to" onchange="convert()" style="margin-top:8px"></select></div>
+    </div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>About this unit converter</h2>
+    <p>From cooking and DIY to travel and schoolwork, converting between units is a daily task. This tool handles the four most-needed categories — length, weight, temperature and digital storage — with accurate conversion factors, all calculated instantly in your browser.</p>
+    <h3>Common conversions</h3>
+    <ul>
+      <li><strong>Kilometres ↔ miles</strong> for travel and running distances.</li>
+      <li><strong>Kilograms ↔ pounds</strong> for weight, shipping and fitness.</li>
+      <li><strong>Celsius ↔ Fahrenheit</strong> for weather and cooking.</li>
+      <li><strong>MB ↔ GB</strong> for files, storage and data plans.</li>
+    </ul>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>How accurate is it?</summary><p>It uses standard SI conversion factors and full floating-point precision, then displays a sensible number of decimals.</p></details>
+      <details><summary>Does it work offline?</summary><p>Yes, once the page has loaded it runs entirely in your browser with no further network calls.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+var DATA={
+  Length:{base:'m',units:{Millimetres:0.001,Centimetres:0.01,Metres:1,Kilometres:1000,Inches:0.0254,Feet:0.3048,Yards:0.9144,Miles:1609.344}},
+  Weight:{base:'g',units:{Milligrams:0.001,Grams:1,Kilograms:1000,Tonnes:1e6,Ounces:28.349523125,Pounds:453.59237,Stone:6350.29318}},
+  'Digital storage':{base:'B',units:{Bytes:1,Kilobytes:1024,Megabytes:1048576,Gigabytes:1073741824,Terabytes:1099511627776}},
+  Temperature:{special:true}
+};
+function opt(sel,arr,def){sel.innerHTML=arr.map(function(u){return '<option'+(u===def?' selected':'')+'>'+u+'</option>';}).join('');}
+function buildUnits(){
+  var cat=document.getElementById('cat').value;
+  var fromSel=document.getElementById('from'),toSel=document.getElementById('to');
+  if(cat==='Temperature'){
+    opt(fromSel,['Celsius','Fahrenheit','Kelvin'],'Celsius');
+    opt(toSel,['Celsius','Fahrenheit','Kelvin'],'Fahrenheit');
+  }else{
+    var units=Object.keys(DATA[cat].units);
+    opt(fromSel,units,units[0]);opt(toSel,units,units[1]||units[0]);
+  }
+  convert();
+}
+function toC(v,u){return u==='Celsius'?v:u==='Fahrenheit'?(v-32)*5/9:v-273.15;}
+function fromC(v,u){return u==='Celsius'?v:u==='Fahrenheit'?v*9/5+32:v+273.15;}
+function convert(){
+  var cat=document.getElementById('cat').value;
+  var v=parseFloat(document.getElementById('inVal').value);
+  var f=document.getElementById('from').value,t=document.getElementById('to').value;
+  var out;
+  if(isNaN(v)){document.getElementById('outVal').value='';return;}
+  if(cat==='Temperature'){out=fromC(toC(v,f),t);}
+  else{var u=DATA[cat].units;out=v*u[f]/u[t];}
+  document.getElementById('outVal').value=parseFloat(out.toPrecision(8));
+}
+opt(document.getElementById('cat'),Object.keys(DATA),'Length');
+buildUnits();
+</script>
+</body>
+</html>

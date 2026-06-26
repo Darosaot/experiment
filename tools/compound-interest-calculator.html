@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Compound Interest Calculator — Investment Growth Tool | QuickTools</title>
+<meta name="description" content="Free compound interest calculator. See how savings or investments grow over time with regular contributions, compounding frequency and interest rate. Includes total interest earned." />
+<meta name="keywords" content="compound interest calculator, investment calculator, savings calculator, interest growth, compounding" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/compound-interest-calculator.html" />
+<meta property="og:title" content="Free Compound Interest Calculator — QuickTools" />
+<meta property="og:description" content="See how your savings or investments grow over time." />
+<meta property="og:image" content="https://quicktools.netlify.app/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="QuickTools — free online tools" />
+<meta name="twitter:image" content="https://quicktools.netlify.app/assets/og.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Compound Interest Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/compound-interest-calculator.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>📈 Compound Interest Calculator</h1>
+    <p>See how savings and investments grow over time — the eighth wonder of the world.</p>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <div class="field"><label>Starting amount</label><input type="number" id="principal" value="1000" min="0" oninput="calc()" /></div>
+      <div class="field"><label>Monthly contribution</label><input type="number" id="monthly" value="100" min="0" oninput="calc()" /></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>Annual interest rate (%)</label><input type="number" id="rate" value="6" step="0.1" min="0" oninput="calc()" /></div>
+      <div class="field"><label>Years</label><input type="number" id="years" value="20" min="0" oninput="calc()" /></div>
+      <div class="field"><label>Compounding</label>
+        <select id="freq" onchange="calc()">
+          <option value="12" selected>Monthly</option>
+          <option value="4">Quarterly</option>
+          <option value="1">Annually</option>
+        </select>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="num" id="endBal">—</div><div class="lbl">Final balance</div></div>
+      <div class="stat"><div class="num" id="contrib">—</div><div class="lbl">You put in</div></div>
+      <div class="stat"><div class="num" id="interest">—</div><div class="lbl">Interest earned</div></div>
+    </div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>About compound interest</h2>
+    <p>Compound interest is interest earned on your interest. Over long periods it produces dramatic, accelerating growth — which is why starting early matters so much. This calculator combines a starting balance with regular monthly contributions and your chosen compounding frequency.</p>
+    <h3>Tips</h3>
+    <ul>
+      <li><strong>Time is the biggest lever.</strong> An extra decade of compounding often beats a much larger contribution.</li>
+      <li><strong>Contribute regularly.</strong> Small monthly amounts add up enormously over decades.</li>
+      <li><strong>Rate matters, but so does consistency.</strong> Don't chase returns at the cost of staying invested.</li>
+    </ul>
+    <p class="notice">This is an educational tool, not financial advice. Real investments carry risk and returns vary year to year.</p>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>Are contributions added before or after interest?</summary><p>Contributions are added each month and then earn interest in subsequent periods, which is the standard convention for regular-savings projections.</p></details>
+      <details><summary>Does it account for inflation or tax?</summary><p>No — results are nominal (before inflation and tax). For "real" purchasing power, subtract your expected inflation rate from the interest rate.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+function fmt(n){return (isFinite(n)?n:0).toLocaleString(undefined,{maximumFractionDigits:2,minimumFractionDigits:2});}
+function calc(){
+  var P=+document.getElementById('principal').value||0;
+  var pmt=+document.getElementById('monthly').value||0;
+  var rate=(+document.getElementById('rate').value||0)/100;
+  var years=+document.getElementById('years').value||0;
+  var n=+document.getElementById('freq').value; // compounds per year
+  var totalMonths=Math.round(years*12);
+  // Simulate monthly to support monthly contributions + chosen compounding.
+  var bal=P, contributed=P;
+  for(var mth=1;mth<=totalMonths;mth++){
+    bal+=pmt;contributed+=pmt;
+    // apply interest when a compounding period closes
+    if(n===12){bal*=1+rate/12;}
+    else if(n===4 && mth%3===0){bal*=1+rate/4;}
+    else if(n===1 && mth%12===0){bal*=1+rate;}
+  }
+  document.getElementById('endBal').textContent=fmt(bal);
+  document.getElementById('contrib').textContent=fmt(contributed);
+  document.getElementById('interest').textContent=fmt(bal-contributed);
+}
+calc();
+</script>
+</body>
+</html>

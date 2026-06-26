@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Word Counter — Free Online Word & Character Count Tool | QuickTools</title>
+<meta name="description" content="Free online word counter. Instantly count words, characters, sentences, paragraphs and estimated reading time as you type. Private, no upload, works on mobile." />
+<meta name="keywords" content="word counter, character counter, word count tool, count words online, reading time calculator" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/word-counter.html" />
+<meta property="og:title" content="Free Word Counter — QuickTools" />
+<meta property="og:description" content="Count words, characters, sentences and reading time instantly. 100% private." />
+<meta property="og:image" content="https://quicktools.netlify.app/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="QuickTools — free online tools" />
+<meta name="twitter:image" content="https://quicktools.netlify.app/assets/og.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Word Counter","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/word-counter.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>📝 Word Counter</h1>
+    <p>Type or paste your text below. Counts update live — nothing is uploaded.</p>
+  </div>
+
+  <div class="panel">
+    <div class="field">
+      <label for="txt">Your text</label>
+      <textarea id="txt" placeholder="Start typing or paste your text here..."></textarea>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="num" id="words">0</div><div class="lbl">Words</div></div>
+      <div class="stat"><div class="num" id="chars">0</div><div class="lbl">Characters</div></div>
+      <div class="stat"><div class="num" id="charsNoSpace">0</div><div class="lbl">No spaces</div></div>
+      <div class="stat"><div class="num" id="sentences">0</div><div class="lbl">Sentences</div></div>
+      <div class="stat"><div class="num" id="paragraphs">0</div><div class="lbl">Paragraphs</div></div>
+      <div class="stat"><div class="num" id="reading">0s</div><div class="lbl">Reading time</div></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn secondary" onclick="document.getElementById('txt').value='';update()">Clear</button>
+      <button class="btn secondary" onclick="QT.copy(document.getElementById('txt').value)">Copy text</button>
+    </div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>About this word counter</h2>
+    <p>Whether you're writing a 500-word essay, staying under a 280-character tweet limit, or hitting a freelance article target, this free word counter gives you live feedback as you type. It counts words, characters (with and without spaces), sentences, paragraphs, and estimates reading time based on an average reading speed of 200 words per minute.</p>
+    <h3>How to use it</h3>
+    <ol>
+      <li>Click into the text box and type, or paste text you've already written.</li>
+      <li>Watch the counts update instantly — there's no "calculate" button.</li>
+      <li>Use <em>Copy text</em> to grab your content, or <em>Clear</em> to start over.</li>
+    </ol>
+    <h3>Is my text private?</h3>
+    <p>Yes. This tool runs entirely in your browser. Your text is never sent to a server, stored, or logged. You can even disconnect from the internet and it will keep working.</p>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>How is a "word" counted?</summary><p>A word is any sequence of characters separated by spaces or line breaks. Multiple spaces are ignored, so accidental double-spaces won't inflate your count.</p></details>
+      <details><summary>How is reading time calculated?</summary><p>We divide your word count by 200 words per minute, the average adult silent reading speed. It's an estimate to help you gauge length.</p></details>
+      <details><summary>Is there a character or word limit?</summary><p>No. You can paste very large documents and the counter keeps up. Performance depends only on your device.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+function update(){
+  var t=document.getElementById('txt').value;
+  var words=(t.trim().match(/\S+/g)||[]).length;
+  var chars=t.length;
+  var noSpace=t.replace(/\s/g,'').length;
+  var sentences=(t.match(/[^.!?]+[.!?]+/g)||[]).length;
+  var paras=(t.trim()?t.trim().split(/\n+/).filter(function(p){return p.trim();}).length:0);
+  var secs=Math.round(words/200*60);
+  var rt = secs<60? secs+'s' : Math.floor(secs/60)+'m '+(secs%60)+'s';
+  document.getElementById('words').textContent=words;
+  document.getElementById('chars').textContent=chars;
+  document.getElementById('charsNoSpace').textContent=noSpace;
+  document.getElementById('sentences').textContent=sentences;
+  document.getElementById('paragraphs').textContent=paras;
+  document.getElementById('reading').textContent=rt;
+}
+document.getElementById('txt').addEventListener('input',update);
+</script>
+</body>
+</html>

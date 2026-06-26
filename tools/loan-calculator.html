@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Loan Calculator — Monthly Payment & Interest Calculator | QuickTools</title>
+<meta name="description" content="Free loan & mortgage calculator. Enter amount, interest rate and term to instantly see your monthly payment, total interest and total cost. Works for car loans, mortgages and personal loans." />
+<meta name="keywords" content="loan calculator, mortgage calculator, monthly payment calculator, interest calculator, car loan calculator, amortization" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/loan-calculator.html" />
+<meta property="og:title" content="Free Loan & Mortgage Calculator — QuickTools" />
+<meta property="og:description" content="See your monthly payment, total interest and total cost in seconds." />
+<meta property="og:image" content="https://quicktools.netlify.app/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="QuickTools — free online tools" />
+<meta name="twitter:image" content="https://quicktools.netlify.app/assets/og.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏦</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Loan Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/loan-calculator.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>🏦 Loan Calculator</h1>
+    <p>Find your monthly payment, total interest and the true cost of any loan or mortgage.</p>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <div class="field"><label>Loan amount</label><input type="number" id="amount" value="20000" min="0" oninput="calc()" /></div>
+      <div class="field"><label>Annual interest rate (%)</label><input type="number" id="rate" value="6.5" step="0.01" min="0" oninput="calc()" /></div>
+      <div class="field"><label>Term (years)</label><input type="number" id="years" value="5" min="0" step="0.5" oninput="calc()" /></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="num" id="monthly">—</div><div class="lbl">Monthly payment</div></div>
+      <div class="stat"><div class="num" id="totalInterest">—</div><div class="lbl">Total interest</div></div>
+      <div class="stat"><div class="num" id="totalCost">—</div><div class="lbl">Total cost</div></div>
+    </div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>How the loan calculator works</h2>
+    <p>This calculator uses the standard amortizing-loan formula used by banks for mortgages, car loans and personal loans. You pay the same amount every month; early payments are mostly interest, later payments are mostly principal. The formula is:</p>
+    <p><code>M = P · r · (1+r)ⁿ / ((1+r)ⁿ − 1)</code></p>
+    <p>where <code>P</code> is the principal, <code>r</code> is the monthly interest rate (annual rate ÷ 12), and <code>n</code> is the number of monthly payments (years × 12).</p>
+    <h3>Tips to pay less interest</h3>
+    <ul>
+      <li><strong>Shorten the term.</strong> A shorter term means higher monthly payments but far less total interest.</li>
+      <li><strong>Shop the rate.</strong> Even a 0.5% lower rate can save thousands over a mortgage's life.</li>
+      <li><strong>Make extra payments.</strong> Any amount above the minimum goes straight to principal and shortens the loan.</li>
+    </ul>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>Does this include taxes and insurance?</summary><p>No. It calculates principal and interest only (P&amp;I). For a mortgage, add property tax, homeowners insurance and any HOA fees separately.</p></details>
+      <details><summary>What currency does it use?</summary><p>The calculator is currency-agnostic — enter the numbers in euros, dollars, pounds or any currency and the results are in the same unit.</p></details>
+      <details><summary>Is my financial data private?</summary><p>Completely. All math happens in your browser. Nothing you type is sent anywhere.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+function fmt(n){return (isFinite(n)?n:0).toLocaleString(undefined,{maximumFractionDigits:2,minimumFractionDigits:2});}
+function calc(){
+  var P=+document.getElementById('amount').value||0;
+  var annual=+document.getElementById('rate').value||0;
+  var years=+document.getElementById('years').value||0;
+  var n=Math.round(years*12);
+  var r=annual/100/12;
+  var M;
+  if(n<=0){M=0;}
+  else if(r===0){M=P/n;}
+  else{M=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);}
+  var total=M*n;var interest=total-P;
+  document.getElementById('monthly').textContent=fmt(M);
+  document.getElementById('totalInterest').textContent=fmt(interest);
+  document.getElementById('totalCost').textContent=fmt(total);
+}
+calc();
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QR Code Generator — Free Online QR Maker | QuickTools</title>
+<meta name="description" content="Free QR code generator. Turn any link, text, email or phone number into a high-resolution QR code and download it as a PNG. No watermark, no sign-up, fully private." />
+<meta name="keywords" content="qr code generator, free qr code, create qr code, qr maker, url to qr code, qr png download" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/qr-code-generator.html" />
+<meta property="og:title" content="Free QR Code Generator — QuickTools" />
+<meta property="og:description" content="Turn any link or text into a downloadable QR code. No watermark." />
+<meta property="og:image" content="https://quicktools.netlify.app/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="QuickTools — free online tools" />
+<meta name="twitter:image" content="https://quicktools.netlify.app/assets/og.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔳</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/qr-code-generator.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>🔳 QR Code Generator</h1>
+    <p>Turn any link or text into a crisp, downloadable QR code — generated in your browser.</p>
+  </div>
+
+  <div class="panel">
+    <div class="field">
+      <label for="data">Link or text</label>
+      <input type="text" id="data" value="https://quicktools.netlify.app" oninput="render()" />
+    </div>
+    <div class="row">
+      <div class="field"><label>Size</label>
+        <select id="size" onchange="render()">
+          <option value="6">Small</option>
+          <option value="8" selected>Medium</option>
+          <option value="12">Large</option>
+        </select>
+      </div>
+      <div class="field"><label>Foreground</label><input type="color" id="fg" value="#0f1220" onchange="render()" style="height:46px;padding:4px" /></div>
+      <div class="field"><label>Background</label><input type="color" id="bg" value="#ffffff" onchange="render()" style="height:46px;padding:4px" /></div>
+    </div>
+    <div style="text-align:center;margin:18px 0">
+      <div id="qr" style="display:inline-block;background:#fff;padding:14px;border-radius:12px"></div>
+    </div>
+    <div class="btn-row" style="justify-content:center">
+      <button class="btn" onclick="downloadPng()">⬇ Download PNG</button>
+    </div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>About this QR code generator</h2>
+    <p>QR ("Quick Response") codes let anyone open a link, see a message, or save a contact by pointing their phone camera at a square. This generator creates them entirely in your browser — your data is never uploaded — and lets you download a high-resolution PNG with no watermark and no usage limits.</p>
+    <h3>What can you encode?</h3>
+    <ul>
+      <li><strong>A website URL</strong> — the most common use, perfect for posters, menus and business cards.</li>
+      <li><strong>Plain text</strong> — a message, a Wi-Fi name, a coupon code.</li>
+      <li><strong>Contact info or email</strong> — paste a <code>mailto:</code> or <code>tel:</code> link.</li>
+    </ul>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>Do these QR codes expire?</summary><p>No. The code is "static" — it encodes your text directly, so it works forever and has no tracking or expiry.</p></details>
+      <details><summary>Can I use it commercially?</summary><p>Yes. The PNG you download is yours to use on flyers, packaging, products or anywhere else, free of charge.</p></details>
+      <details><summary>Why keep good contrast?</summary><p>Scanners need clear contrast between foreground and background. Dark code on a light background scans most reliably.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/qrcode.min.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+function render(){
+  var box=document.getElementById('qr');
+  if(typeof qrcode==='undefined'){box.innerHTML='<span style="color:#888;font-size:.8rem">QR library loading… check your connection.</span>';return;}
+  var text=document.getElementById('data').value||' ';
+  var cell=+document.getElementById('size').value;
+  var fg=document.getElementById('fg').value, bg=document.getElementById('bg').value;
+  var qr=qrcode(0,'M');qr.addData(text);qr.make();
+  box.style.background=bg;
+  box.innerHTML=qr.createImgTag(cell,8).replace('<img','<img id="qrimg" style="image-rendering:pixelated"');
+  // recolor via canvas for download/custom colors
+  window._qrText=text;window._qrCell=cell;window._qrFg=fg;window._qrBg=bg;
+  // Re-render as colored canvas
+  drawCanvas();
+}
+function drawCanvas(){
+  var qr=qrcode(0,'M');qr.addData(window._qrText);qr.make();
+  var n=qr.getModuleCount();var cell=window._qrCell;var margin=4;
+  var size=(n+margin*2)*cell;
+  var cv=document.createElement('canvas');cv.width=size;cv.height=size;
+  var ctx=cv.getContext('2d');ctx.fillStyle=window._qrBg;ctx.fillRect(0,0,size,size);
+  ctx.fillStyle=window._qrFg;
+  for(var r=0;r<n;r++)for(var c=0;c<n;c++){if(qr.isDark(r,c)){ctx.fillRect((c+margin)*cell,(r+margin)*cell,cell,cell);}}
+  window._qrCanvas=cv;
+  var box=document.getElementById('qr');
+  box.innerHTML='';cv.style.width='220px';cv.style.height='220px';cv.style.imageRendering='pixelated';box.appendChild(cv);
+}
+function downloadPng(){
+  if(!window._qrCanvas)return;
+  QT.download('qrcode.png',window._qrCanvas.toDataURL('image/png'));
+}
+render();
+</script>
+</body>
+</html>

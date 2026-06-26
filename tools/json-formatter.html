@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JSON Formatter & Validator — Beautify & Minify JSON | QuickTools</title>
+<meta name="description" content="Free JSON formatter, validator and minifier. Paste messy JSON to beautify it with proper indentation, validate it, or minify it. Runs entirely in your browser." />
+<meta name="keywords" content="json formatter, json validator, json beautifier, json minifier, format json online, pretty print json" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/json-formatter.html" />
+<meta property="og:title" content="Free JSON Formatter & Validator — QuickTools" />
+<meta property="og:description" content="Beautify, validate and minify JSON instantly and privately." />
+<meta property="og:image" content="https://quicktools.netlify.app/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="QuickTools — free online tools" />
+<meta name="twitter:image" content="https://quicktools.netlify.app/assets/og.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>{ }</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"JSON Formatter","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/json-formatter.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>{ } JSON Formatter &amp; Validator</h1>
+    <p>Beautify, validate or minify JSON — all in your browser, nothing uploaded.</p>
+  </div>
+
+  <div class="panel">
+    <div class="field">
+      <label>JSON input</label>
+      <textarea id="input" placeholder='{"paste":"your JSON here","nested":{"works":true},"list":[1,2,3]}' oninput="run('format')">{"name":"QuickTools","tools":14,"free":true,"tags":["fast","private"]}</textarea>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="run('format')">Beautify</button>
+      <button class="btn secondary" onclick="run('minify')">Minify</button>
+      <button class="btn secondary" onclick="QT.copy(document.getElementById('output').value)">Copy output</button>
+    </div>
+    <div id="status" class="hint" style="margin-top:10px"></div>
+    <div class="field" style="margin-top:12px">
+      <label>Output</label>
+      <textarea id="output" readonly></textarea>
+    </div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>About this JSON formatter</h2>
+    <p>JSON (JavaScript Object Notation) is the standard format for APIs and config files, but it's often delivered as one unreadable line. This tool pretty-prints it with clean indentation so you can actually read it, validates that it's well-formed (pointing out where it breaks), and can minify it back down to save bytes.</p>
+    <h3>Private by design</h3>
+    <p>Many online JSON tools send your data to a server to format it — risky if that JSON contains tokens, keys or personal data. This one parses and formats entirely in your browser, so nothing ever leaves your machine.</p>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>What does "Invalid JSON" mean?</summary><p>Your text isn't valid JSON — common causes are trailing commas, single quotes instead of double quotes, or unquoted keys. The status line shows where parsing failed.</p></details>
+      <details><summary>Does it handle large files?</summary><p>Yes, within your browser's memory. Very large files depend on your device.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+function run(mode){
+  var inp=document.getElementById('input').value;
+  var status=document.getElementById('status');
+  var out=document.getElementById('output');
+  if(!inp.trim()){out.value='';status.textContent='';return;}
+  try{
+    var obj=JSON.parse(inp);
+    out.value=mode==='minify'?JSON.stringify(obj):JSON.stringify(obj,null,2);
+    status.innerHTML='<span style="color:var(--accent)">✓ Valid JSON</span>';
+  }catch(e){
+    out.value='';
+    status.innerHTML='<span style="color:var(--danger)">✕ Invalid JSON — '+e.message+'</span>';
+  }
+}
+run('format');
+</script>
+</body>
+</html>

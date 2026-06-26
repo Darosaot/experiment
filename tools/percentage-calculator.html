@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Percentage Calculator — Free Online Percent Tool | QuickTools</title>
+<meta name="description" content="Free percentage calculator. Find X% of a number, what percent one number is of another, and percentage increase or decrease. Fast, simple and private." />
+<meta name="keywords" content="percentage calculator, percent calculator, percentage increase, percentage decrease, what percent, percent of a number" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/percentage-calculator.html" />
+<meta property="og:title" content="Free Percentage Calculator — QuickTools" />
+<meta property="og:description" content="Solve every common percentage problem instantly." />
+<meta property="og:image" content="https://quicktools.netlify.app/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="QuickTools — free online tools" />
+<meta name="twitter:image" content="https://quicktools.netlify.app/assets/og.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>％</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Percentage Calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/percentage-calculator.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>％ Percentage Calculator</h1>
+    <p>Three common percentage questions, solved instantly as you type.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0">What is X% of Y?</h3>
+    <div class="row">
+      <div class="field"><label>Percent (%)</label><input type="number" id="a1" value="15" oninput="c1()" /></div>
+      <div class="field"><label>of</label><input type="number" id="a2" value="200" oninput="c1()" /></div>
+    </div>
+    <div class="output"><span class="result-big" id="r1">—</span></div>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0">X is what percent of Y?</h3>
+    <div class="row">
+      <div class="field"><label>Value</label><input type="number" id="b1" value="30" oninput="c2()" /></div>
+      <div class="field"><label>of</label><input type="number" id="b2" value="120" oninput="c2()" /></div>
+    </div>
+    <div class="output"><span class="result-big" id="r2">—</span></div>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0">Percentage change from X to Y</h3>
+    <div class="row">
+      <div class="field"><label>From</label><input type="number" id="d1" value="50" oninput="c3()" /></div>
+      <div class="field"><label>To</label><input type="number" id="d2" value="65" oninput="c3()" /></div>
+    </div>
+    <div class="output"><span class="result-big" id="r3">—</span></div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>How to calculate percentages</h2>
+    <p>A percentage is just a fraction of 100. These three calculators cover the questions people ask most:</p>
+    <ul>
+      <li><strong>X% of Y</strong> = (X ÷ 100) × Y. Example: 15% of 200 = 30. Great for tips, discounts and taxes.</li>
+      <li><strong>X is what % of Y</strong> = (X ÷ Y) × 100. Example: 30 is 25% of 120. Useful for test scores and progress.</li>
+      <li><strong>Percentage change</strong> = ((Y − X) ÷ X) × 100. A positive result is an increase, a negative one a decrease.</li>
+    </ul>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>How do I calculate a discount?</summary><p>Use "X% of Y" with the discount percent and the original price to get the amount off, then subtract it from the price.</p></details>
+      <details><summary>What's the difference between percentage points and percent?</summary><p>Going from 10% to 15% is a 5 percentage-point rise, but a 50% increase relative to the starting value. The change calculator above gives the relative percent.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+function num(id){return parseFloat(document.getElementById(id).value);}
+function c1(){var a=num('a1'),b=num('a2');document.getElementById('r1').textContent=isFinite(a)&&isFinite(b)?(a/100*b).toLocaleString(undefined,{maximumFractionDigits:4}):'—';}
+function c2(){var a=num('b1'),b=num('b2');document.getElementById('r2').textContent=isFinite(a)&&isFinite(b)&&b!==0?(a/b*100).toLocaleString(undefined,{maximumFractionDigits:4})+'%':'—';}
+function c3(){var a=num('d1'),b=num('d2');if(!isFinite(a)||!isFinite(b)||a===0){document.getElementById('r3').textContent='—';return;}var ch=(b-a)/a*100;document.getElementById('r3').textContent=(ch>=0?'+':'')+ch.toLocaleString(undefined,{maximumFractionDigits:4})+'%';}
+c1();c2();c3();
+</script>
+</body>
+</html>

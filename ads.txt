@@ -1,0 +1,5 @@
+# ads.txt — required by Google AdSense to authorise ad sellers.
+# AFTER you add your AdSense publisher ID, replace pub-0000000000000000
+# below with your real publisher number (the digits after "pub-").
+# Example line Google will tell you to use:
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

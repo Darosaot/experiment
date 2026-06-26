@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VAT Calculator — Add or Remove VAT / Sales Tax | QuickTools</title>
+<meta name="description" content="Free VAT calculator. Add VAT to a net price or remove VAT from a gross price at any rate. Shows the net, the VAT amount and the gross total instantly." />
+<meta name="keywords" content="vat calculator, add vat, remove vat, sales tax calculator, reverse vat, vat inclusive exclusive" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/vat-calculator.html" />
+<meta property="og:title" content="Free VAT / Sales Tax Calculator — QuickTools" />
+<meta property="og:description" content="Add or remove VAT at any rate, instantly." />
+<meta property="og:image" content="https://quicktools.netlify.app/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="QuickTools — free online tools" />
+<meta name="twitter:image" content="https://quicktools.netlify.app/assets/og.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"VAT Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/vat-calculator.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>🧮 VAT Calculator</h1>
+    <p>Add VAT to a net price, or work backwards to strip VAT from a gross price.</p>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <div class="field"><label>Amount</label><input type="number" id="amount" value="100" min="0" oninput="calc()" /></div>
+      <div class="field"><label>VAT rate (%)</label><input type="number" id="rate" value="21" step="0.1" min="0" oninput="calc()" /></div>
+      <div class="field"><label>Mode</label>
+        <select id="mode" onchange="calc()">
+          <option value="add">Add VAT (amount is net)</option>
+          <option value="remove">Remove VAT (amount is gross)</option>
+        </select>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="num" id="net">—</div><div class="lbl">Net (excl. VAT)</div></div>
+      <div class="stat"><div class="num" id="vat">—</div><div class="lbl">VAT amount</div></div>
+      <div class="stat"><div class="num" id="gross">—</div><div class="lbl">Gross (incl. VAT)</div></div>
+    </div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>About this VAT calculator</h2>
+    <p>VAT (Value Added Tax) is a consumption tax added to most goods and services across Europe and many other regions. This calculator works both directions: <strong>add</strong> VAT when you have a net (tax-exclusive) price, or <strong>remove</strong> it to find the net hidden inside a gross (tax-inclusive) price — handy for invoices, expenses and bookkeeping.</p>
+    <h3>The maths</h3>
+    <ul>
+      <li><strong>Adding VAT:</strong> gross = net × (1 + rate/100). The VAT is gross − net.</li>
+      <li><strong>Removing VAT:</strong> net = gross ÷ (1 + rate/100). This is "reverse VAT" — you can't just subtract the percentage, because the percentage was applied to the smaller net figure.</li>
+    </ul>
+    <p>Common EU rates include 20% (France, UK historically), 21% (Spain, Netherlands, Belgium), 19% (Germany), 22% (Italy) and 23% (Ireland, Portugal). Always check your local standard and reduced rates.</p>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>Why can't I just subtract 21% to remove VAT?</summary><p>Because the 21% was added to the net amount, not the gross. Removing it requires dividing by 1.21, which gives a slightly different (correct) figure.</p></details>
+      <details><summary>Does it work for US sales tax?</summary><p>Yes — sales tax adds the same way. Enter your local rate in the rate field.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+function fmt(n){return (isFinite(n)?n:0).toLocaleString(undefined,{maximumFractionDigits:2,minimumFractionDigits:2});}
+function calc(){
+  var a=+document.getElementById('amount').value||0;
+  var r=(+document.getElementById('rate').value||0)/100;
+  var mode=document.getElementById('mode').value;
+  var net,gross,vat;
+  if(mode==='add'){net=a;gross=a*(1+r);vat=gross-net;}
+  else{gross=a;net=a/(1+r);vat=gross-net;}
+  document.getElementById('net').textContent=fmt(net);
+  document.getElementById('vat').textContent=fmt(vat);
+  document.getElementById('gross').textContent=fmt(gross);
+}
+calc();
+</script>
+</body>
+</html>

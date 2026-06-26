@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tip Calculator — Split the Bill & Calculate Tips | QuickTools</title>
+<meta name="description" content="Free tip calculator. Enter your bill, choose a tip percentage, and split between any number of people. See the tip amount and total per person instantly." />
+<meta name="keywords" content="tip calculator, gratuity calculator, split the bill, tip percentage, restaurant tip" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/tip-calculator.html" />
+<meta property="og:title" content="Free Tip Calculator — QuickTools" />
+<meta property="og:description" content="Calculate the tip and split the bill instantly." />
+<meta property="og:image" content="https://quicktools.netlify.app/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="QuickTools — free online tools" />
+<meta name="twitter:image" content="https://quicktools.netlify.app/assets/og.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧾</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Tip Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/tip-calculator.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>🧾 Tip Calculator</h1>
+    <p>Work out the tip and split the bill fairly in seconds.</p>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <div class="field"><label>Bill amount</label><input type="number" id="bill" value="50" min="0" oninput="calc()" /></div>
+      <div class="field"><label>Tip %</label><input type="number" id="tip" value="15" min="0" oninput="calc()" /></div>
+      <div class="field"><label>Split between</label><input type="number" id="people" value="2" min="1" oninput="calc()" /></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="num" id="tipAmt">—</div><div class="lbl">Tip amount</div></div>
+      <div class="stat"><div class="num" id="total">—</div><div class="lbl">Total bill</div></div>
+      <div class="stat"><div class="num" id="perPerson">—</div><div class="lbl">Each pays</div></div>
+    </div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>About this tip calculator</h2>
+    <p>No more awkward mental maths at the end of a meal. Enter the bill, pick a tip percentage, and optionally split between any number of people — the tool shows the tip, the grand total and exactly what each person owes.</p>
+    <h3>How much should you tip?</h3>
+    <ul>
+      <li><strong>15%</strong> — standard for adequate service in many countries.</li>
+      <li><strong>18–20%</strong> — good to excellent service.</li>
+      <li>In much of Europe, service is often included — check the bill first.</li>
+    </ul>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>Is the tip calculated before or after tax?</summary><p>This tool tips on the amount you enter. If you prefer to tip on the pre-tax subtotal, enter that figure as the bill.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+function fmt(n){return (isFinite(n)?n:0).toLocaleString(undefined,{maximumFractionDigits:2,minimumFractionDigits:2});}
+function calc(){
+  var bill=+document.getElementById('bill').value||0;
+  var tip=+document.getElementById('tip').value||0;
+  var people=Math.max(1,+document.getElementById('people').value||1);
+  var tipAmt=bill*tip/100;var total=bill+tipAmt;
+  document.getElementById('tipAmt').textContent=fmt(tipAmt);
+  document.getElementById('total').textContent=fmt(total);
+  document.getElementById('perPerson').textContent=fmt(total/people);
+}
+calc();
+</script>
+</body>
+</html>
