@@ -28,8 +28,16 @@ no one can do these for you. Budget about **20 minutes, once.**
 
 ## Then (optional, to actually hit €150/month)
 Open `marketing/promotion-free-traffic.md`. The near-passive must-do is just:
-**use all 13 Etsy tags + ask buyers for a review.** Pinterest pins (one
-afternoon) are the best free booster.
+**use all 13 Etsy tags + ask buyers for a review.** Pinterest pins are the best
+free booster — and I've already made them for you:
+
+- **Pinterest pins are done.** `product/pinterest-pins/` has 5 ready-to-post
+  images + `captions.txt` with a title & description for each. Make a free
+  Pinterest business account, upload them, and point each to your listing URL.
+  (~15 min, then they keep getting found for months.)
+- **Bundle (optional, fewer sales needed).** A second template
+  (`product/Content-Social-Planner.xlsx`) is built so you can sell both together
+  for €19 — see `marketing/bundle-listing.md`. At €19 you only need ~9 sales/mo.
 
 ## A note from me (your honest expectations)
 - I can't make sales *happen* — that depends on traffic + reviews, which build

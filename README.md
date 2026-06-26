@@ -17,16 +17,21 @@ can't do for you). Everything else is already done.
 
 ```
 product/
-  Freelancer-Finance-Toolkit.xlsx   ← the product you sell (7 tabs, automatic)
+  Freelancer-Finance-Toolkit.xlsx   ← main product (7 tabs, automatic)
+  Content-Social-Planner.xlsx       ← 2nd product (bundle to raise avg sale)
   BUYER-QUICKSTART.md               ← short guide that ships to buyers
-  build_toolkit.py                  ← regenerates the .xlsx from scratch
+  build_toolkit.py                  ← regenerates the finance .xlsx
+  build_planner.py                  ← regenerates the planner .xlsx
   build_previews.py                 ← regenerates the listing images
+  build_pins.py                     ← regenerates the Pinterest pins
   listing-images/                   ← ready-to-upload Etsy/Gumroad photos
     1-cover.png  2-dashboard.png  3-features.png
+  pinterest-pins/                   ← 5 ready-to-post pins + captions.txt
 
 marketing/
   etsy-listing.md            ← title, tags, description (Etsy — do this first)
   gumroad-listing.md         ← same, for Gumroad
+  bundle-listing.md          ← sell both templates together for a higher avg sale
   pricing-and-strategy.md    ← the honest €150/month math + pricing
   promotion-free-traffic.md  ← lowest-effort ways to get seen
   faq.md                     ← buyer FAQ
@@ -46,6 +51,8 @@ LAUNCH-CHECKLIST.md          ← your 20-minute one-time setup
 ```bash
 cd product
 pip install openpyxl pillow
-python3 build_toolkit.py     # rebuilds the .xlsx
+python3 build_toolkit.py     # rebuilds the finance .xlsx
+python3 build_planner.py     # rebuilds the content planner .xlsx
 python3 build_previews.py    # rebuilds the listing images
+python3 build_pins.py        # rebuilds the Pinterest pins
 ```
