@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Color Converter — HEX to RGB to HSL Tool | QuickTools</title>
+<meta name="description" content="Free color converter. Convert between HEX, RGB and HSL with a live preview. Pick a color or type a value and copy the result for CSS instantly." />
+<meta name="keywords" content="color converter, hex to rgb, rgb to hex, hsl converter, css color, color picker" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/color-converter.html" />
+<meta property="og:title" content="Free Color Converter — QuickTools" />
+<meta property="og:description" content="Convert HEX, RGB and HSL with a live preview." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Color Converter","applicationCategory":"DesignApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/color-converter.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>🎨 Color Converter</h1>
+    <p>Convert between HEX, RGB and HSL with a live preview. Click any value to copy it.</p>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <div class="field" style="flex:0 0 120px">
+        <label>Pick</label>
+        <input type="color" id="picker" value="#6c8cff" oninput="fromPicker()" style="height:90px;padding:4px;width:100%" />
+      </div>
+      <div style="flex:1">
+        <div class="field"><label>HEX</label><input type="text" id="hex" value="#6c8cff" oninput="fromHex()" /></div>
+        <div class="field"><label>RGB</label><input type="text" id="rgb" value="rgb(108, 140, 255)" oninput="fromRgb()" /></div>
+        <div class="field" style="margin-bottom:0"><label>HSL</label><input type="text" id="hsl" value="hsl(227, 100%, 71%)" oninput="fromHsl()" /></div>
+      </div>
+    </div>
+    <div id="preview" style="height:80px;border-radius:12px;margin-top:16px;border:1px solid var(--border)"></div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>About this color converter</h2>
+    <p>Designers and developers constantly switch between color formats: a design tool gives you HEX, CSS wants RGB or HSL, and a brand guide lists something else entirely. This converter keeps all three formats in sync as you edit any one of them, with a live swatch so you always see exactly what you're working with.</p>
+    <h3>The formats</h3>
+    <ul>
+      <li><strong>HEX</strong> — six hex digits like <code>#6c8cff</code>, the most common web format.</li>
+      <li><strong>RGB</strong> — red, green and blue from 0–255, e.g. <code>rgb(108, 140, 255)</code>.</li>
+      <li><strong>HSL</strong> — hue, saturation and lightness, intuitive for adjusting shades.</li>
+    </ul>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>Can I paste any format?</summary><p>Yes — edit the HEX, RGB or HSL box directly and the others update. You can also use the color picker.</p></details>
+      <details><summary>Does it support alpha/transparency?</summary><p>This tool focuses on solid colors. For transparency, append an alpha value in your CSS, e.g. <code>rgba(108,140,255,0.5)</code>.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+function clamp(v,a,b){return Math.min(b,Math.max(a,v));}
+function rgbToHex(r,g,b){return '#'+[r,g,b].map(function(x){return clamp(Math.round(x),0,255).toString(16).padStart(2,'0');}).join('');}
+function hexToRgb(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(function(c){return c+c;}).join('');var n=parseInt(h,16);return {r:(n>>16)&255,g:(n>>8)&255,b:n&255};}
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;var max=Math.max(r,g,b),min=Math.min(r,g,b),h,s,l=(max+min)/2;if(max===min){h=s=0;}else{var d=max-min;s=l>0.5?d/(2-max-min):d/(max+min);switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;default:h=(r-g)/d+4;}h/=6;}return {h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};}
+function hslToRgb(h,s,l){h/=360;s/=100;l/=100;var r,g,b;if(s===0){r=g=b=l;}else{var hue2rgb=function(p,q,t){if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;};var q=l<0.5?l*(1+s):l+s-l*s;var p=2*l-q;r=hue2rgb(p,q,h+1/3);g=hue2rgb(p,q,h);b=hue2rgb(p,q,h-1/3);}return {r:r*255,g:g*255,b:b*255};}
+function setAll(r,g,b){
+  var hex=rgbToHex(r,g,b);var hsl=rgbToHsl(r,g,b);
+  document.getElementById('hex').value=hex;
+  document.getElementById('rgb').value='rgb('+Math.round(r)+', '+Math.round(g)+', '+Math.round(b)+')';
+  document.getElementById('hsl').value='hsl('+hsl.h+', '+hsl.s+'%, '+hsl.l+'%)';
+  document.getElementById('picker').value=hex;
+  document.getElementById('preview').style.background=hex;
+}
+function fromPicker(){var c=hexToRgb(document.getElementById('picker').value);setAll(c.r,c.g,c.b);}
+function fromHex(){var v=document.getElementById('hex').value.trim();if(/^#?[0-9a-fA-F]{3}$|^#?[0-9a-fA-F]{6}$/.test(v)){var c=hexToRgb(v);setAll(c.r,c.g,c.b);}}
+function fromRgb(){var m=document.getElementById('rgb').value.match(/(\d+)\D+(\d+)\D+(\d+)/);if(m){setAll(+m[1],+m[2],+m[3]);}}
+function fromHsl(){var m=document.getElementById('hsl').value.match(/(\d+)\D+(\d+)\D+(\d+)/);if(m){var c=hslToRgb(+m[1],+m[2],+m[3]);setAll(c.r,c.g,c.b);}}
+[['hex','click'],['rgb','click'],['hsl','click']].forEach(function(p){document.getElementById(p[0]).addEventListener('dblclick',function(){QT.copy(this.value);});});
+fromPicker();
+</script>
+</body>
+</html>
