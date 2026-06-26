@@ -11,11 +11,28 @@ and no server cost**, which makes it perfect for free Netlify hosting.
 
 ---
 
-## 💶 How this makes money (and what you must do)
+## 💶 How this makes money (and the one thing only you can do)
 
-Realistically, money has to land in **your** account, so there are a few
-one-time steps only you can do. They take ~15 minutes total. After that it runs
-itself.
+There is exactly **one** thing I (or anyone) physically cannot do for you:
+money has to land in an account that legally belongs to **you**. Creating a
+payment/ad account in your name would be fraud, so you must provide **one**
+account link. Everything else is already built and deployed.
+
+To make that one step as fast as possible, the site supports **three**
+monetisation options — pick whichever you can set up quickest. All you do is
+paste one value into `assets/js/config.js`.
+
+| Option | Setup time | Approval needed? | Edit in `config.js` |
+|--------|-----------|------------------|---------------------|
+| **A · Support / tip button** (Ko-fi, Buy Me a Coffee) | ~2 min | ❌ None — works instantly | `SUPPORT_URL` |
+| **B · Affiliate link** (Amazon, NordVPN…) | ~10 min | Program signup | `AFFILIATE_URL` |
+| **C · Display ads** (Google AdSense) | ~10 min | ✅ Site review + traffic | `ADSENSE_PUBLISHER_ID` |
+
+**Fastest path to a working money surface:** create a free Ko-fi page
+(<https://ko-fi.com>), copy its URL, paste it into `SUPPORT_URL`. A "Support
+this site" button instantly appears on every page and can receive money the
+same day — no approval, no waiting. AdSense (Option C) is the most *passive*
+long-term, but it needs approval and traffic first, so it's the slowest to pay.
 
 ### Step 1 — Deploy to Netlify (≈2 min)
 Netlify is already connected on your side, so you just point it at this repo:
