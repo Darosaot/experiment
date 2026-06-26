@@ -34,6 +34,7 @@
           '<a href="' + depth + 'tools/loan-calculator.html">Loan Calc</a>' +
           '<a href="' + depth + 'tools/password-generator.html">Passwords</a>' +
           '<a href="' + depth + 'tools/word-counter.html">Word Counter</a>' +
+          '<a href="' + depth + 'guides/index.html">Guides</a>' +
           '<a href="' + depth + 'about.html">About</a>' +
           (cfg.SUPPORT_URL ? '<a href="' + cfg.SUPPORT_URL + '" target="_blank" rel="noopener" style="color:#fff;background:linear-gradient(135deg,var(--brand),var(--brand-2))">' + (cfg.SUPPORT_LABEL || '❤ Support') + '</a>' : '') +
         '</div>' +
