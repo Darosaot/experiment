@@ -19,6 +19,12 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
+# Serve the SVG icon for /favicon.ico requests (avoids crawler 404s)
+[[redirects]]
+  from = "/favicon.ico"
+  to = "/assets/icon.svg"
+  status = 200
+
 # Pretty 404
 [[redirects]]
   from = "/*"

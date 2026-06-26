@@ -1,0 +1,12 @@
+{
+  "name": "QuickTools — Free Online Tools",
+  "short_name": "QuickTools",
+  "description": "Fast, free, private online tools: calculators, generators and converters that run entirely in your browser.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0f1220",
+  "theme_color": "#0f1220",
+  "icons": [
+    { "src": "/assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

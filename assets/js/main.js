@@ -116,8 +116,44 @@
     }
   };
 
+  /* ---- SEO: FAQ rich-snippet structured data ----
+     Auto-builds FAQPage JSON-LD from the visible FAQ on each page so the
+     pages are eligible for Google's expandable FAQ rich results, which
+     lift click-through rate (and therefore traffic + revenue). */
+  function injectFaqSchema() {
+    var dets = document.querySelectorAll(".faq details");
+    if (!dets.length) return;
+    var items = [];
+    dets.forEach(function (d) {
+      var q = d.querySelector("summary"), a = d.querySelector("p");
+      if (q && a) {
+        items.push({ "@type": "Question", "name": q.textContent.trim(),
+          "acceptedAnswer": { "@type": "Answer", "text": a.textContent.trim() } });
+      }
+    });
+    if (!items.length) return;
+    var s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": items });
+    document.head.appendChild(s);
+  }
+
+  /* ---- PWA: manifest + theme colour for installability / repeat visits ---- */
+  function injectPwaMeta() {
+    if (!document.querySelector('link[rel="manifest"]')) {
+      var l = document.createElement("link");
+      l.rel = "manifest"; l.href = depth + "site.webmanifest";
+      document.head.appendChild(l);
+    }
+    if (!document.querySelector('meta[name="theme-color"]')) {
+      var m = document.createElement("meta");
+      m.name = "theme-color"; m.content = "#0f1220";
+      document.head.appendChild(m);
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
-    buildNav(); buildFooter(); loadAdSense();
+    buildNav(); buildFooter(); loadAdSense(); injectFaqSchema(); injectPwaMeta();
     // render tool grid on home if present
     var grid = document.getElementById("tool-grid");
     if (grid) {
