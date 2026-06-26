@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BMI Calculator — Free Body Mass Index Tool (Metric & Imperial) | QuickTools</title>
+<meta name="description" content="Free BMI calculator. Enter your height and weight in metric or imperial units to instantly find your Body Mass Index and weight category. Private and accurate." />
+<meta name="keywords" content="bmi calculator, body mass index, bmi chart, healthy weight calculator, bmi metric imperial" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/bmi-calculator.html" />
+<meta property="og:title" content="Free BMI Calculator — QuickTools" />
+<meta property="og:description" content="Find your Body Mass Index and weight category instantly." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"BMI Calculator","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/bmi-calculator.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>⚖️ BMI Calculator</h1>
+    <p>Find your Body Mass Index and weight category in seconds.</p>
+  </div>
+
+  <div class="panel">
+    <div class="field">
+      <label>Units</label>
+      <select id="units" onchange="toggleUnits()">
+        <option value="metric">Metric (cm, kg)</option>
+        <option value="imperial">Imperial (ft/in, lb)</option>
+      </select>
+    </div>
+    <div id="metricFields" class="row">
+      <div class="field"><label>Height (cm)</label><input type="number" id="cm" value="175" oninput="calc()" /></div>
+      <div class="field"><label>Weight (kg)</label><input type="number" id="kg" value="70" oninput="calc()" /></div>
+    </div>
+    <div id="imperialFields" class="row" style="display:none">
+      <div class="field"><label>Height (ft)</label><input type="number" id="ft" value="5" oninput="calc()" /></div>
+      <div class="field"><label>Height (in)</label><input type="number" id="in" value="9" oninput="calc()" /></div>
+      <div class="field"><label>Weight (lb)</label><input type="number" id="lb" value="154" oninput="calc()" /></div>
+    </div>
+    <div class="stat-row" style="margin-top:6px">
+      <div class="stat"><div class="num" id="bmi">—</div><div class="lbl">Your BMI</div></div>
+      <div class="stat"><div class="num" id="cat" style="font-size:1.1rem">—</div><div class="lbl">Category</div></div>
+    </div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>About Body Mass Index</h2>
+    <p>BMI is a simple screening number that relates your weight to your height. It's calculated as weight in kilograms divided by height in metres squared (kg/m²). It's widely used because it's quick and needs no equipment, though it doesn't distinguish muscle from fat.</p>
+    <h3>The standard categories (adults)</h3>
+    <ul>
+      <li><strong>Under 18.5</strong> — Underweight</li>
+      <li><strong>18.5 – 24.9</strong> — Healthy weight</li>
+      <li><strong>25.0 – 29.9</strong> — Overweight</li>
+      <li><strong>30.0 and above</strong> — Obese</li>
+    </ul>
+    <p class="notice">BMI is a general guide, not a diagnosis. Athletes and very muscular people may have a high BMI without excess fat. Always consult a doctor for personal health advice.</p>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>Is BMI accurate for everyone?</summary><p>It's a useful population-level screen but less accurate for athletes, the elderly, and during pregnancy. Treat it as one data point among many.</p></details>
+      <details><summary>Does it work for children?</summary><p>Children and teens use age- and sex-specific BMI percentiles instead of the adult categories above.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+function toggleUnits(){
+  var m=document.getElementById('units').value==='metric';
+  document.getElementById('metricFields').style.display=m?'flex':'none';
+  document.getElementById('imperialFields').style.display=m?'none':'flex';
+  calc();
+}
+function calc(){
+  var m=document.getElementById('units').value==='metric',bmi;
+  if(m){var h=+document.getElementById('cm').value/100,w=+document.getElementById('kg').value;bmi=h>0?w/(h*h):0;}
+  else{var totalIn=(+document.getElementById('ft').value)*12+(+document.getElementById('in').value);var lb=+document.getElementById('lb').value;bmi=totalIn>0?703*lb/(totalIn*totalIn):0;}
+  if(!isFinite(bmi)||bmi<=0){document.getElementById('bmi').textContent='—';document.getElementById('cat').textContent='—';return;}
+  document.getElementById('bmi').textContent=bmi.toFixed(1);
+  var c=document.getElementById('cat');
+  if(bmi<18.5){c.textContent='Underweight';c.style.color='#f7c948';}
+  else if(bmi<25){c.textContent='Healthy';c.style.color='#36d399';}
+  else if(bmi<30){c.textContent='Overweight';c.style.color='#f7c948';}
+  else{c.textContent='Obese';c.style.color='#ff6b6b';}
+}
+calc();
+</script>
+</body>
+</html>

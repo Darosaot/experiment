@@ -11,7 +11,13 @@
     { slug: "qr-code-generator",   icon: "🔳", name: "QR Code Generator",     desc: "Turn any link or text into a downloadable QR code." },
     { slug: "case-converter",      icon: "🔤", name: "Case Converter",        desc: "UPPER, lower, Title, sentence & more, instantly." },
     { slug: "color-converter",     icon: "🎨", name: "Color Converter",       desc: "Convert HEX ⇄ RGB ⇄ HSL with a live preview." },
-    { slug: "unit-converter",      icon: "📐", name: "Unit Converter",        desc: "Length, weight, temperature & data units." }
+    { slug: "unit-converter",      icon: "📐", name: "Unit Converter",        desc: "Length, weight, temperature & data units." },
+    { slug: "bmi-calculator",      icon: "⚖️", name: "BMI Calculator",        desc: "Find your Body Mass Index & weight category." },
+    { slug: "age-calculator",      icon: "🎂", name: "Age Calculator",        desc: "Your exact age in years, months & days." },
+    { slug: "tip-calculator",      icon: "🧾", name: "Tip Calculator",        desc: "Calculate tips and split the bill fairly." },
+    { slug: "discount-calculator", icon: "🏷️", name: "Discount Calculator",   desc: "Sale price and how much you really save." },
+    { slug: "compound-interest-calculator", icon: "📈", name: "Compound Interest", desc: "See how savings & investments grow." },
+    { slug: "base64-encoder",      icon: "🔠", name: "Base64 Encode/Decode",  desc: "Encode & decode Base64 with Unicode support." }
   ];
   window.QT_TOOLS = TOOLS;
 

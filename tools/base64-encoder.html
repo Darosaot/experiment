@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Base64 Encoder & Decoder — Free Online Tool | QuickTools</title>
+<meta name="description" content="Free Base64 encoder and decoder. Convert text to Base64 and back instantly, with full Unicode support. Runs entirely in your browser — nothing is uploaded." />
+<meta name="keywords" content="base64 encoder, base64 decoder, encode base64, decode base64, base64 converter, online base64" />
+<link rel="canonical" href="https://quicktools.netlify.app/tools/base64-encoder.html" />
+<meta property="og:title" content="Free Base64 Encoder / Decoder — QuickTools" />
+<meta property="og:description" content="Encode and decode Base64 instantly with Unicode support." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔠</text></svg>" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Base64 Encoder and Decoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://quicktools.netlify.app/tools/base64-encoder.html"}
+</script>
+</head>
+<body data-depth="tool">
+<header id="site-header"></header>
+<main class="container tool-wrap">
+  <div class="tool-head">
+    <h1>🔠 Base64 Encoder / Decoder</h1>
+    <p>Convert text to Base64 and back, with full Unicode support — all in your browser.</p>
+  </div>
+
+  <div class="panel">
+    <div class="field">
+      <label>Input</label>
+      <textarea id="input" placeholder="Type or paste text here..." oninput="run()">Hello, world! 🌍</textarea>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="setMode('encode')" id="btnEnc">Encode →</button>
+      <button class="btn secondary" onclick="setMode('decode')" id="btnDec">← Decode</button>
+    </div>
+    <div class="field" style="margin-top:16px">
+      <label>Output</label>
+      <textarea id="output" readonly></textarea>
+    </div>
+    <div class="btn-row"><button class="btn secondary" onclick="QT.copy(document.getElementById('output').value)">Copy output</button></div>
+  </div>
+
+  <div class="ad-slot in-article" data-ad>Advertisement</div>
+
+  <section class="prose">
+    <h2>About Base64</h2>
+    <p>Base64 is a way of representing binary or text data using only 64 safe ASCII characters. It's everywhere in computing: embedding images in CSS or HTML (data URIs), encoding email attachments, storing tokens, and transmitting data through systems that only handle text.</p>
+    <h3>Unicode-safe</h3>
+    <p>Naive Base64 tools break on emoji and accented characters. This one encodes via UTF-8 first, so <code>café</code> and <code>🌍</code> round-trip perfectly.</p>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details><summary>Is Base64 encryption?</summary><p>No. Base64 is encoding, not encryption — anyone can decode it. Never use it to protect secrets.</p></details>
+      <details><summary>Is my data uploaded?</summary><p>No. Encoding and decoding happen entirely in your browser.</p></details>
+    </div>
+  </section>
+  <div class="ad-slot" data-ad>Advertisement</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+var mode='encode';
+function setMode(m){mode=m;
+  document.getElementById('btnEnc').className='btn'+(m==='encode'?'':' secondary');
+  document.getElementById('btnDec').className='btn'+(m==='decode'?'':' secondary');
+  run();}
+function run(){
+  var t=document.getElementById('input').value;var out;
+  try{
+    if(mode==='encode'){out=btoa(unescape(encodeURIComponent(t)));}
+    else{out=decodeURIComponent(escape(atob(t.trim())));}
+  }catch(e){out='⚠️ Invalid input for '+mode+'.';}
+  document.getElementById('output').value=out;
+}
+setMode('encode');
+</script>
+</body>
+</html>
